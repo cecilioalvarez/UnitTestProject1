@@ -1,0 +1,7 @@
+﻿*****************
+antonio,matematicas,7
+antonio,lengua,8
+-----------------
+gema,matematicas,5
+gema,lengua,9
+*****************
