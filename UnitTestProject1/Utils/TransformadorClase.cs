@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +24,9 @@ namespace UnitTestProject1.Utils
 
             IList<string> lineas = LectorFichero.Lineas();
 
-            lineas.RemoveAt(0);
-            lineas.RemoveAt(lineas.Count() - 1);
+            EliminarCabeceraPie(lineas);
 
-            Clase clase = new Clase("mi clase", new List<Alumno>());
+            Clase clase = new Clase("mi clase");
 
             foreach (string linea in lineas)
             {
@@ -34,25 +34,21 @@ namespace UnitTestProject1.Utils
                 if (!linea.Contains("-")){
 
                     //recogiendo el nombre del alumno
-                    string[] textos = linea.Split(',');
+                    string[] propiedadesAlumno = linea.Split(',');
+                    Alumno alumno = new Alumno(propiedadesAlumno[0]);
+                    Nota nota = new Nota(Double.Parse(propiedadesAlumno[2], CultureInfo.InvariantCulture), propiedadesAlumno[1]);
 
-                    Alumno alumno = new Alumno(textos[0], new List<Nota>());
-                    if (!clase.Alumnos.Contains(alumno))
+                    if (clase.Alumnos.Contains(alumno))
                     {
-                        Nota nota = new Nota(Double.Parse(textos[2]), textos[1]);
-                        alumno.AddNota(nota);
-                        clase.AddAlumno(alumno);
-                        Console.Write("valor" + textos[2]);
-                        Console.Write("asignatura" + textos[1]);
 
+                        int posicionAlumno = clase.Alumnos.IndexOf(new Alumno(propiedadesAlumno[0], null));
+                        clase.Alumnos[posicionAlumno].AddNota(nota);
+                    
                     }
                     else
                     {
-                       int posicion= clase.Alumnos.IndexOf(new Alumno(textos[0],null));
-                        Console.Write("valor" + textos[2]);
-                        Console.Write("asignatura" + textos[1]);
-                        Nota nota = new Nota(Double.Parse(textos[2]), textos[1]);
-                       clase.Alumnos[posicion].AddNota(nota);
+                        alumno.AddNota(nota);
+                        clase.AddAlumno(alumno);
                     }
                   
                 }
@@ -60,6 +56,16 @@ namespace UnitTestProject1.Utils
             }
 
             return clase;
+        }
+
+        private void EliminarCabeceraPie(IList<string> lineas)
+        {
+            if (lineas.Count != 0)
+            {
+                lineas.RemoveAt(0);
+                lineas.RemoveAt(lineas.Count() - 1);
+            }
+
         }
     }
 }

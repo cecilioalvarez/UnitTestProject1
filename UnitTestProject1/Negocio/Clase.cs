@@ -29,6 +29,14 @@ namespace Negocio
             Alumnos = alumnos;
         }
 
+
+        public Clase(string nombre)
+        {
+
+            Nombre = nombre;
+           
+        }
+
         public Nota NotaMedia()
         {
 

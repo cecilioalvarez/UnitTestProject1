@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,62 +12,53 @@ namespace UnitTestProject1.Test
 {
     public class NotaTest
     {
-        [Fact]
-        void EstaAprobadaTest()
+        [Theory]
+        [InlineData(4,false)]
+        [InlineData(4.9, false)]
+        [InlineData(5, true)]
+        [InlineData(6, true)]
+        void EstaAprobadaTest(double valor, bool resolucion)
         {
-            // AAA 
-            //Arrange 
-            //Act
-            //Assert 
-            //preparas los objetos que necesitas para las pruebas
-            //arrange
-            Nota notaEs6 = new Nota(6, "Matematicas");
-            Nota notaEs5 = new Nota(5, "Matematicas");
-            //act
-            bool aprobado5 = notaEs6.EstaAprobada();
-            bool aprobado6 = notaEs5.EstaAprobada();
-
-
-            Assert.True(aprobado5);
-            Assert.True(aprobado6);
-
-
-
+          
+            Nota nota = new Nota(valor, "Matematicas");
+            bool estado = nota.EstaAprobada();
+            Assert.Equal(resolucion, estado);
         }
 
+     
 
-        [Fact]
-        void FueraDeRangoValidoTest()
+
+        [Theory]
+        [InlineData(10.1)]
+        [InlineData(-1)]
+    
+        void FueraDeRangoValidoTest(double nota)
         {
-          //hacer algo parecido pero en el mundo del manejo de excepcioens
 
             Nota notaNoValida = new Nota();
-
-            var excepcionMayor10 = Assert.Throws<Exception>(() => notaNoValida.Valor = 10.1);
-            var excepcionMenor0 = Assert.Throws<Exception>(() => notaNoValida.Valor = -1);
-
-            Assert.Equal("nota no entra en rango valido",excepcionMayor10.Message);
-            Assert.Equal("nota no entra en rango valido", excepcionMenor0.Message);
-
-
-
-
+            var excepcion = Assert.Throws<Exception>(() => notaNoValida.Valor =nota);
+            Assert.Equal("nota no entra en rango valido",excepcion.Message);
+         
 
         }
+
 
         [Fact]
-        void EstaSuspensaTest()
+        void NotaValorDecimalValidaTest()
         {
+            //hacer algo parecido pero en el mundo del manejo de excepcioens
+
+            string notaTexto = "7.5";
+            double nota=double.Parse(notaTexto,CultureInfo.InvariantCulture);
+            Nota notaValida = new Nota(nota, "matematicas");
+
+            Assert.Equal(7.5, notaValida.Valor);
+
          
-            Nota nota = new Nota(4, "Matematicas");
-            //act
-            bool estaLaNotaAprobada = nota.EstaAprobada();
-
-            Assert.False(estaLaNotaAprobada);
-
-
 
         }
+
+       
 
         [Fact]
         void EsMismaAsignaturaTest()
@@ -75,13 +67,9 @@ namespace UnitTestProject1.Test
             Nota nota1 = new Nota(4, "Matematicas");
             Nota nota2 = new Nota(7, "Matematicas");
 
-            //act
             bool sonLaMismaAsignatura = nota1.EsMismaAsignatura(nota2);
 
             Assert.True(sonLaMismaAsignatura);
-
-
-
         }
 
         [Fact]
@@ -95,9 +83,6 @@ namespace UnitTestProject1.Test
            int esMayor = nota2.EsMayor(nota1);
 
             Assert.Equal(1, esMayor);
-
-
-
         }
 
         [Fact]
@@ -111,9 +96,6 @@ namespace UnitTestProject1.Test
             int esMenor = nota1.EsMayor(nota2);
 
             Assert.Equal(-1,esMenor);
-
-
-
         }
 
         [Fact]

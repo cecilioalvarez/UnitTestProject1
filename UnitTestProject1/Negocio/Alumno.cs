@@ -19,6 +19,11 @@ namespace Negocio
 
         }
 
+        public Alumno(string nombre)
+        {
+            Nombre = nombre;
+        }
+
         public Alumno(string nombre, List<Nota> notas)
         {
 
