@@ -24,35 +24,44 @@ namespace UnitTestProject1.Utils
 
             IList<string> lineas = LectorFichero.Lineas();
 
+            // como se que tipo de fichero estoy manejando porque realemente
+            // el lector lo que hace es leer un fichero de text ocon su contenido y punto
+            //probablemente la primera liena del fichero me define de donde A o B
+
+            string tipo = "";
+
+            if (lineas.Count!=0 && lineas[0].Contains("*"))
+            {
+                tipo = "TipoA";
+            }else if (lineas.Count != 0 &&  lineas[0].Contains("/"))
+            {
+                tipo = "TipoB";
+            }else
+            {
+                tipo = "TipoC";
+            }
+
             EliminarCabeceraPie(lineas);
 
             Clase clase = new Clase("mi clase");
 
+
+            // que aqui tendremos que operar de una forma bastante diferente 
+
             foreach (string linea in lineas)
             {
+                if (tipo.Equals("TipoA")) {
 
-                if (!linea.Contains("-")){
+                    ProcesarLineaA(clase, linea);
+                }else if (tipo.Equals("TipoB"))
+                {
 
-                    //recogiendo el nombre del alumno
-                    string[] propiedadesAlumno = linea.Split(',');
-                    Alumno alumno = new Alumno(propiedadesAlumno[0]);
-                    Nota nota = new Nota(Double.Parse(propiedadesAlumno[2], CultureInfo.InvariantCulture), propiedadesAlumno[1]);
+                    ProcesarLineaB(clase, linea);
+                }else
+                {
+                    ProcesarLineaC(clase, linea);
 
-                    if (clase.Alumnos.Contains(alumno))
-                    {
-
-                        int posicionAlumno = clase.Alumnos.IndexOf(new Alumno(propiedadesAlumno[0], null));
-                        clase.Alumnos[posicionAlumno].AddNota(nota);
-                    
-                    }
-                    else
-                    {
-                        alumno.AddNota(nota);
-                        clase.AddAlumno(alumno);
-                    }
-                  
                 }
-               
             }
 
             return clase;
@@ -67,5 +76,25 @@ namespace UnitTestProject1.Utils
             }
 
         }
+        private Clase ProcesarLineaA( Clase clase ,string linea)
+        {
+            
+            return new ProcesadorLineaTipoA().Procesar(clase, linea);
+
+        }
+
+        private Clase ProcesarLineaB(Clase clase, string linea)
+        {
+          
+              return new ProcesadorLineaTipoB().Procesar(clase, linea);
+
+
+        }
+
+        private Clase ProcesarLineaC(Clase clase, string linea)
+        {
+            return new ProcesadorLineaTipoC().Procesar(clase, linea);
+
+        }
     }
-}
+    }

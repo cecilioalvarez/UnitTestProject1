@@ -1,0 +1,7 @@
+﻿||
+ANTONIO GOMEZ,7.5,matematicas
+ANTONIO GOMEZ,8,lengua
+*****************
+GEMA SANCHEZ,5,matematicas
+GEMA SANCHEZ,9,lengua
+||

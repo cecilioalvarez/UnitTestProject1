@@ -91,6 +91,8 @@
     <Compile Include="Negocio\Alumno.cs" />
     <Compile Include="Negocio\Clase.cs" />
     <Compile Include="Antiguo\Persona.cs" />
+    <Compile Include="Negocio\Cliente.cs" />
+    <Compile Include="Negocio\Factura.cs" />
     <Compile Include="Prueba.cs" />
     <Compile Include="TestIntegracion\ClaseAlumnoTest.cs" />
     <Compile Include="Test\AlumnoEstadisticaTest.cs" />
@@ -99,12 +101,19 @@
     <Compile Include="Negocio\Nota.cs" />
     <Compile Include="Antiguo\CalculadoraTest.cs" />
     <Compile Include="Test\ClaseAlumnoTest.cs" />
+    <Compile Include="Test\ClienteTest.cs" />
+    <Compile Include="Test\FacturaTest.cs" />
     <Compile Include="Test\LectorFicheroTest.cs" />
     <Compile Include="Test\NotaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Antiguo\PersonaTest.cs" />
+    <Compile Include="Test\ProcesadoresLineaTest.cs" />
     <Compile Include="Test\TransformadorClaseTest.cs" />
     <Compile Include="Utils\LectorFichero.cs" />
+    <Compile Include="Utils\ProcesadorLinea.cs" />
+    <Compile Include="Utils\ProcesadorLineaTipoA.cs" />
+    <Compile Include="Utils\ProcesadorLineaTipoB.cs" />
+    <Compile Include="Utils\ProcesadorLineaTipoC.cs" />
     <Compile Include="Utils\TransformadorClase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +125,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="datos\clase.txt" />
+    <Content Include="datos\clase3.txt" />
+    <Content Include="datos\clase2.txt" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
