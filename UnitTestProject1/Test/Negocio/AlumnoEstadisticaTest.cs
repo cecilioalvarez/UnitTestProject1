@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Negocio;
 using Xunit;
 
-namespace UnitTestProject1.Test
+namespace UnitTestProject1.Test.Negocio
 {
     public class AlumnoEstadisticaTest
     {

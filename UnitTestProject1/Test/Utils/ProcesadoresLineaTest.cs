@@ -8,7 +8,7 @@ using Negocio;
 using UnitTestProject1.Utils;
 using Xunit;
 
-namespace UnitTestProject1.Test
+namespace UnitTestProject1.Test.Utils
 {
     public  class ProcesadoresLineaTest
     {
@@ -17,30 +17,13 @@ namespace UnitTestProject1.Test
         public void ProcesarLineaTipoATest ()
         {
 
-            //arrange 
-
             string linea = "antonio,matematicas,7.5";
             ProcesadorLinea procesadorLinea = new ProcesadorLineaTipoA();
             Clase clase = new Clase("mi clase");
 
             procesadorLinea.Procesar(clase, linea);
 
-            IList<Alumno> listaAlumnos = clase.Alumnos;
-            Alumno alumno1 = listaAlumnos[0];
-          
-
-            IList<Nota> notasAlumno1 = alumno1.Notas;
-         
-
-            Assert.NotNull(clase);
-            Assert.NotNull(listaAlumnos);
-            Assert.Equal("antonio", alumno1.Nombre);
-            Assert.Equal("matematicas", notasAlumno1[0].Asignatura);
-            Assert.Equal(7.5, notasAlumno1[0].Valor);
-
-
-
-
+            AssertClaseNotasHelper(clase, "antonio", "matematicas", 7.5);
 
         }
 
@@ -48,39 +31,18 @@ namespace UnitTestProject1.Test
         public void ProcesarLineaTipoBTest()
         {
 
-            //arrange 
-
             string linea = "gema,5,matematicas";
             ProcesadorLinea procesadorLinea = new ProcesadorLineaTipoB();
             Clase clase = new Clase("mi clase");
 
             procesadorLinea.Procesar(clase, linea);
 
-            IList<Alumno> listaAlumnos = clase.Alumnos;
-            Alumno alumno1 = listaAlumnos[0];
-
-
-            IList<Nota> notasAlumno1 = alumno1.Notas;
-
-
-            Assert.NotNull(clase);
-            Assert.NotNull(listaAlumnos);
-            Assert.Equal("gema", alumno1.Nombre);
-            Assert.Equal("matematicas", notasAlumno1[0].Asignatura);
-            Assert.Equal(5, notasAlumno1[0].Valor);
-
-
-
-
+            AssertClaseNotasHelper(clase, "gema", "matematicas", 5);
 
         }
-
-
         [Fact]
         public void ProcesarLineaTipoCTest()
         {
-
-            //arrange 
 
             string linea = "ANTONIO GOMEZ,7.5,matematicas";
             ProcesadorLinea procesadorLinea = new ProcesadorLineaTipoC();
@@ -88,22 +50,19 @@ namespace UnitTestProject1.Test
 
             procesadorLinea.Procesar(clase, linea);
 
+            AssertClaseNotasHelper(clase, "antonio", "matematicas", 7.5);
+        }
+
+        public void AssertClaseNotasHelper (Clase clase ,string nombre, string asignatura, double nota )
+        {
             IList<Alumno> listaAlumnos = clase.Alumnos;
             Alumno alumno1 = listaAlumnos[0];
-
-
             IList<Nota> notasAlumno1 = alumno1.Notas;
-
-
             Assert.NotNull(clase);
             Assert.NotNull(listaAlumnos);
-            Assert.Equal("antonio", alumno1.Nombre);
-            Assert.Equal("matematicas", notasAlumno1[0].Asignatura);
-            Assert.Equal(7.5, notasAlumno1[0].Valor);
-
-
-
-
+            Assert.Equal(nombre, alumno1.Nombre);
+            Assert.Equal(asignatura, notasAlumno1[0].Asignatura);
+            Assert.Equal(nota, notasAlumno1[0].Valor);
 
         }
 

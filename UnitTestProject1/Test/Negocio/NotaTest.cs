@@ -8,7 +8,7 @@ using Negocio;
 using Xunit;
 using Xunit.Sdk;
 
-namespace UnitTestProject1.Test
+namespace UnitTestProject1.Test.Negocio
 {
     public class NotaTest
     {

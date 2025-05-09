@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnitTestProject1.Negocio;
 using Xunit;
 
-namespace UnitTestProject1.Test
+namespace UnitTestProject1.Test.Ejercicio
 {
     public  class FacturaTest
     {

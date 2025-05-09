@@ -7,7 +7,7 @@ using Negocio;
 using UnitTestProject1.Utils;
 using Xunit;
 
-namespace UnitTestProject1.Test
+namespace UnitTestProject1.Test.Utils
 {
     public class LectorFicheroTest
     {

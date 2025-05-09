@@ -7,7 +7,7 @@ using Moq;
 using Negocio;
 using Xunit;
 
-namespace UnitTestProject1.Test
+namespace UnitTestProject1.Test.Negocio
 {
     public class AlumnoTest :IDisposable
     {
